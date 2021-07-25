@@ -1,8 +1,11 @@
 package com.example.sighome_v00;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +17,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;     //파이어베이스 인증
+    private FirebaseUser mUser;             //사용자 정보
     private DatabaseReference mDatabaseRef; //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd;      //로그인 입력필드
 
@@ -29,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
+        mUser=mFirebaseAuth.getCurrentUser();
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("SIGHOME");
 
         mEtEmail = findViewById(R.id.email_et);
@@ -46,13 +52,17 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //로그인 성공
-                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, com.example.sighome_v00.MainActivity.class);
-                            startActivity(intent);
-                            finish(); //현재 액티비티 파괴
+                            if(mUser.isEmailVerified()) {//사용자가 이메일 인증을 완료했다면
+                                //로그인 성공
+                                Toast.makeText(LoginActivity.this, "환영합니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, com.example.sighome_v00.MainActivity.class);
+                                startActivity(intent);
+                                finish(); //현재 액티비티 파괴
+                            }else{
+                                Toast.makeText(LoginActivity.this, "이메일 인증을 완료해주세요.", Toast.LENGTH_SHORT).show();
+                            }
                         }else{
-                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "잘못된 이메일/비밀번호 입니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -68,5 +78,23 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //빈 화면 클릭시 키보드 내리는 함수
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View focusView = getCurrentFocus();
+        if (focusView != null) {
+            Rect rect = new Rect();
+            focusView.getGlobalVisibleRect(rect);
+            int x = (int) ev.getX(), y = (int) ev.getY();
+            if (!rect.contains(x, y)) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null)
+                    imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0);
+                focusView.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

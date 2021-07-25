@@ -84,7 +84,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="6">
                     <EditText
-                        android:id="@+id/username_et"
+                        android:id="@+id/regist_username_et"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
