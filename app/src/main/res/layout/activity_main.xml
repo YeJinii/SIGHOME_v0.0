@@ -46,9 +46,34 @@
             android:textColor="@color/black"
             android:textSize="30sp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/mqttSend_btn"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:text="TEMP BUTTON"
+            android:textSize="30sp"
+            android:background="@drawable/round_square_3"
+            android:textColor="@color/white"
+            android:fontFamily="@font/asiahead1"
+            android:layout_gravity="center_vertical|center_horizontal"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"/>
+        android:layout_weight="3"/>
 
 </LinearLayout>
