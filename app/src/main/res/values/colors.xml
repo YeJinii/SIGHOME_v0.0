@@ -14,4 +14,7 @@
     <color name="in_door">#BDD7EE</color>
     <color name="out_door">#FF9800</color>
 
+    <color name="turn_off">#FFC800</color>
+    <color name="emergency">#FF3D2B</color>
+
 </resources>

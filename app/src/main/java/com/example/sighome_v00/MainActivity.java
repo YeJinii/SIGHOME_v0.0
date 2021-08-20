@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mRef;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증
     private FirebaseUser mUser;
-    private TextView mTvUserName, mqttSendBtn;
+    private TextView mTvUserName, turnOffBtn;
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
@@ -52,15 +52,14 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAuth=FirebaseAuth.getInstance();
         mUser=mFirebaseAuth.getCurrentUser();
 
-        mqttSendBtn=findViewById(R.id.mqttSend_btn);
+        turnOffBtn=findViewById(R.id.turnOff_btn);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        getSupportActionBar().setTitle("SIG HOME");
-
+        getSupportActionBar().setTitle("스마트 홈 케어 시스템");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -102,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        mqttSendBtn.setOnClickListener(new View.OnClickListener() {
+        turnOffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mqttSendBtn.setBackgroundResource(R.drawable.round_square);
+                turnOffBtn.setBackgroundResource(R.drawable.round_square_3);
 //                try {
 //                    mqttClient.publish("/phone/turnoff/enter", new MqttMessage("android".getBytes()));
 //                    mqttClient.publish("/phone/turnoff/bell", new MqttMessage("android".getBytes()));

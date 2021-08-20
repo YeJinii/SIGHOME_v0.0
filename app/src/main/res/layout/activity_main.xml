@@ -23,7 +23,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"/>
+            android:layout_weight="1.5"/>
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -34,35 +34,65 @@
             android:text="SIGHOME"
             android:textColor="@color/black"
             android:textSize="50sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"/>
+            <TextView
+                android:id="@+id/username_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:fontFamily="@font/asiahead1"
+                android:text="userName"
+                android:textColor="@color/main_blue"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:background="@drawable/username_tv"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"/>
         <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/username_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/asiahead1"
-                android:text="userName"
-                android:textColor="@color/main_blue"
+                android:id="@+id/turnOff_btn"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:text="알람 해제"
                 android:textSize="30sp"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/asiahead1"
-                android:gravity="center"
-                android:text="님 환영합니다!"
+                android:background="@drawable/turn_off_btn"
                 android:textColor="@color/black"
-                android:textSize="30sp" />
+                android:fontFamily="@font/acarracer"
+                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </LinearLayout>
         <Space
             android:layout_width="match_parent"
@@ -83,7 +113,39 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="4"
-                android:text="mqtt 전송 버튼(임시)"
+                android:text="긴급 신고"
+                android:textSize="30sp"
+                android:background="@drawable/emergency_btn"
+                android:textColor="@color/white"
+                android:fontFamily="@font/acarracer"
+                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+        <LinearLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/exp_btn"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:text="설명"
                 android:textSize="30sp"
                 android:background="@drawable/round_square_3"
                 android:textColor="@color/white"
@@ -99,7 +161,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"/>
+            android:layout_weight="1.5"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
