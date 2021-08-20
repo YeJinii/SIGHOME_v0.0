@@ -10,4 +10,8 @@
     <color name="main_blue">#0070C0</color>
     <color name="background_blue">#025D9E</color>
     <color name="light_green">#92D050</color>
+
+    <color name="in_door">#BDD7EE</color>
+    <color name="out_door">#FF9800</color>
+
 </resources>

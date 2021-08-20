@@ -1,91 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/login_bg"
-    android:orientation="vertical">
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"/>
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:fontFamily="@font/acarracer"
-        android:gravity="center"
-        android:text="SIGHOME"
-        android:textColor="@color/black"
-        android:textSize="50sp"/>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"/>
+    tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/username_tv"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:fontFamily="@font/asiahead1"
-            android:text="userName"
-            android:textColor="@color/main_blue"
-            android:textSize="30sp"
-            android:gravity="center"/>
-        <TextView
+            android:background="@color/in_door">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/asiahead1"
+            android:layout_weight="3"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:fontFamily="@font/acarracer"
             android:gravity="center"
-            android:text="님 환영합니다!"
+            android:text="SIGHOME"
             android:textColor="@color/black"
-            android:textSize="30sp" />
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"/>
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:orientation="horizontal">
+            android:textSize="50sp"/>
         <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/mqttSend_btn"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:text="mqtt 전송 버튼(임시)"
-            android:textSize="30sp"
-            android:background="@drawable/round_square_3"
-            android:textColor="@color/white"
-            android:fontFamily="@font/asiahead1"
-            android:gravity="center"
-            android:layout_gravity="center_vertical|center_horizontal"/>
-
+            <TextView
+                android:id="@+id/username_tv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/asiahead1"
+                android:text="userName"
+                android:textColor="@color/main_blue"
+                android:textSize="30sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/asiahead1"
+                android:gravity="center"
+                android:text="님 환영합니다!"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+        </LinearLayout>
         <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+        <LinearLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/mqttSend_btn"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:text="mqtt 전송 버튼(임시)"
+                android:textSize="30sp"
+                android:background="@drawable/round_square_3"
+                android:textColor="@color/white"
+                android:fontFamily="@font/asiahead1"
+                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navi_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
