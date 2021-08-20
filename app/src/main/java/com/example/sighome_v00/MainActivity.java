@@ -55,18 +55,10 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try {
-            Toast.makeText(MainActivity.this, "왜 안가노", Toast.LENGTH_SHORT).show();
-            mqttClient.publish("/phone/turnoff/enter", new MqttMessage("android".getBytes()));
-            mqttClient.publish("/phone/turnoff/bell", new MqttMessage("android".getBytes()));
-            mqttClient.publish("/phone/turnoff/window", new MqttMessage("android".getBytes()));
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-        /*
         mqttSendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mqttSendBtn.setBackgroundResource(R.drawable.round_square);
                 try {
                     mqttClient.publish("/phone/turnoff/enter", new MqttMessage("android".getBytes()));
                     mqttClient.publish("/phone/turnoff/bell", new MqttMessage("android".getBytes()));
@@ -75,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        });*/
+        });
 
         String userId = mUser.getUid();
         mTvUserName=(TextView)findViewById(R.id.username_tv);
@@ -84,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                     String userName = snapshot.child("UserAccount").child(userId).child("userName").getValue().toString();
-                     mTvUserName.setText(userName);
+                    String userName = snapshot.child("UserAccount").child(userId).child("userName").getValue().toString();
+                    mTvUserName.setText(userName);
                 }
             }
             @Override
