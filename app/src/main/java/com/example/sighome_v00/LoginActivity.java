@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
-        mUser=mFirebaseAuth.getCurrentUser();
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("SIGHOME");
 
         mEtEmail = findViewById(R.id.email_et);
@@ -56,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            mUser=mFirebaseAuth.getCurrentUser();
                             if(mUser.isEmailVerified()) {//사용자가 이메일 인증을 완료했다면
                                 //로그인 성공
                                 Toast.makeText(LoginActivity.this, "환영합니다.", Toast.LENGTH_SHORT).show();

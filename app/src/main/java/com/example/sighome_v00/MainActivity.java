@@ -1,17 +1,21 @@
 package com.example.sighome_v00;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증
     private FirebaseUser mUser;
     private TextView mTvUserName, turnOffBtn;
+    private ImageView modeIv;
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mUser=mFirebaseAuth.getCurrentUser();
 
         turnOffBtn=findViewById(R.id.turnOff_btn);
+        modeIv=findViewById(R.id.mode_iv);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,16 +80,21 @@ public class MainActivity extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if(id == R.id.inside_mode){//실내 모드
-
+                    toolbar.setBackgroundColor(Color.parseColor("#BDD7EE"));
+                    modeIv.setImageResource(R.drawable.ic_inside_mode);
                 }
                 else if(id == R.id.outside_mode){//실외 모드
-
+                    toolbar.setBackgroundColor(Color.parseColor("#FFC738"));
+                    modeIv.setImageResource(R.drawable.ic_outside_mode);
                 }
                 else if(id == R.id.app_intro){//앱 소개
 
                 }
                 else if(id == R.id.logout){//로그아웃
-
+                    mFirebaseAuth.signOut();
+                    Intent intent = new Intent(MainActivity.this, com.example.sighome_v00.LoginActivity.class);
+                    startActivity(intent);
+                    finish(); //현재 액티비티 파괴
                 }
 
                 return true;
@@ -134,15 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //추가된 소스, ToolBar에 menu.xml을 인플레이트함
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
+        //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
     public boolean onOptionsItemSelected(MenuItem item) {
         //return super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
@@ -150,11 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             }
-            case R.id.logout_btn: {
-                // User chose the "Settings" item, show the app settings UI...
-                Toast.makeText(getApplicationContext(), "로그아웃 버튼이 클릭됨", Toast.LENGTH_LONG).show();
-                return true;
-            }
+
         }
         return super.onOptionsItemSelected(item);
     }

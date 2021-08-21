@@ -17,7 +17,26 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/in_door">
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7.8"/>
+                <ImageView
+                    android:id="@+id/mode_iv"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_inside_mode"
+                    android:layout_gravity="center"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"/>
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <Space
@@ -31,7 +50,7 @@
             android:layout_weight="1.5"
             android:fontFamily="@font/acarracer"
             android:gravity="center"
-            android:text="SIGHOME"
+            android:text="SIG HOME"
             android:textColor="@color/black"
             android:textSize="50sp"/>
 
