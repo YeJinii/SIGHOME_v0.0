@@ -33,7 +33,16 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="7.8"/>
+                    android:layout_weight="0.2"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7.8"
+                    android:text="상황별 전등색 설명서"
+                    android:fontFamily="@font/asiahead1"
+                    android:textSize="22sp"
+                    android:gravity="left|center_vertical"
+                    android:textColor="@color/black"/>
             </LinearLayout>
         </LinearLayout>
         <Space
@@ -104,14 +113,17 @@
                     android:clickable="true"
                     android:visibility="visible" />
             </LinearLayout>
-
+            <Space
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"/>
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="2.4"
                 android:fontFamily="@font/asiahead1"
-                android:gravity="center"
+                android:gravity="left|center_vertical"
                 android:text="침입자가 감지 되었을 땐 빨간색"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -139,13 +151,17 @@
                     android:clickable="true"
                     android:visibility="visible" />
             </LinearLayout>
+            <Space
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"/>
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="105dp"
-                android:layout_weight="2.5"
+                android:layout_weight="2.4"
                 android:fontFamily="@font/custom_font_family"
-                android:gravity="center"
+                android:gravity="left|center_vertical"
                 android:text="초인종이 눌렸을 땐 노란색"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -171,14 +187,17 @@
                     android:clickable="true"
                     android:visibility="visible" />
             </LinearLayout>
-
+            <Space
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"/>
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="105dp"
-                android:layout_weight="2.5"
+                android:layout_weight="2.4"
                 android:fontFamily="@font/custom_font_family"
-                android:gravity="center"
+                android:gravity="left|center_vertical"
                 android:text="창문 흔들림이 감지되었을 땐 파란색"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
