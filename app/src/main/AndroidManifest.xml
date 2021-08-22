@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sighome_v00">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_sighome"
@@ -10,12 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SIGHOME_v00"
         android:usesCleartextTraffic="true">
-
-        <!--mqtt 서비스 -->
-        <service android:name="org.eclipse.paho.android.service.MqttService"/>
+        <activity android:name=".ExplainActivity"></activity>
+        <!-- mqtt 서비스 -->
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
 
         <activity android:name=".SplashActivity" />
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,10 +29,5 @@
         <activity android:name=".Register1Activity" />
         <activity android:name=".MainActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
 
 </manifest>

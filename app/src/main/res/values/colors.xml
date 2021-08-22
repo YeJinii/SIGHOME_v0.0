@@ -9,10 +9,10 @@
     <color name="gray">#4C4C4C</color>
     <color name="main_blue">#0070C0</color>
     <color name="background_blue">#025D9E</color>
-    <color name="light_green">#92D050</color>
 
     <color name="in_door">#BDD7EE</color>
     <color name="out_door">#FFC738</color>
+    <color name="explain">#7DC880</color>
 
     <color name="turn_off">#FFC800</color>
     <color name="emergency">#FF3D2B</color>

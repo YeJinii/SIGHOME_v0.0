@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                     modeIv.setImageResource(R.drawable.ic_outside_mode);
                 }
                 else if(id == R.id.app_intro){//앱 소개
-
+                    Intent intent = new Intent(MainActivity.this, com.example.sighome_v00.ExplainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else if(id == R.id.logout){//로그아웃
                     mFirebaseAuth.signOut();
