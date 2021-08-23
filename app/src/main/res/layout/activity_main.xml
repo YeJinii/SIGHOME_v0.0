@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:fontFamily="@font/asiahead1"
-                android:text="userName"
+                android:text="안녕하세요"
                 android:textColor="@color/main_blue"
                 android:textSize="30sp"
                 android:gravity="center"
@@ -128,7 +128,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/mqttSend_btn"
+                android:id="@+id/em_call_btn"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="4"

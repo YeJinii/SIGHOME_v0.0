@@ -3,6 +3,7 @@ package com.example.sighome_v00;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mRef;
     private FirebaseAuth mFirebaseAuth; //파이어베이스 인증
     private FirebaseUser mUser;
-    private TextView mTvUserName, turnOffBtn;
+    private TextView mTvUserName, turnOffBtn, emCallBtn;
     private ImageView modeIv;
 
     private DrawerLayout mDrawerLayout;
@@ -144,6 +145,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        emCallBtn = findViewById(R.id.em_call_btn);
+
+        emCallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:01056237516"));
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 

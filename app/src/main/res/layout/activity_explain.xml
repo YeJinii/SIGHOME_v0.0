@@ -8,7 +8,6 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-
         <LinearLayout
             android:id="@+id/toolbar2"
             android:layout_width="match_parent"
@@ -24,7 +23,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"/>
                 <ImageView
-                    android:id="@+id/mode_iv"
+                    android:id="@+id/back_iv"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="0.6"

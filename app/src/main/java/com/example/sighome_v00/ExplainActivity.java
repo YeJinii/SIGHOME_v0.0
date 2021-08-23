@@ -13,6 +13,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ExplainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class ExplainActivity extends AppCompatActivity {
     private boolean doorBtnControl = true;
     private boolean bellBtnControl = true;
     private boolean windowBtnControl = true;
+    private ImageView backIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class ExplainActivity extends AppCompatActivity {
         ImageButton doorBtn = findViewById(R.id.enterBotton);
         ImageButton bellBtn = findViewById(R.id.bellBotton);
         ImageButton windowBtn = findViewById(R.id.windowBotton);
-
+        backIv = findViewById(R.id.back_iv);
 
         doorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,13 +72,15 @@ public class ExplainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        backIv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //회원가입 화면으로 이동
+                Intent intent = new Intent(ExplainActivity.this, com.example.sighome_v00.MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    private TextView setColorInPartitial(String pre_string, String string, String color, TextView textView){
-        SpannableStringBuilder builder = new SpannableStringBuilder(pre_string + string);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor(color)), 0, pre_string.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.append(builder);
-        return textView;
     }
 
 }
