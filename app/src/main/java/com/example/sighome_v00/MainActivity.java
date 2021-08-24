@@ -1,10 +1,14 @@
 package com.example.sighome_v00;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -48,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
     private MqttClient mqttClient;
 
+    static final int SMS_SEND_PERMISSION=1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -148,19 +156,46 @@ public class MainActivity extends AppCompatActivity {
 
         emCallBtn = findViewById(R.id.em_call_btn);
 
-        emCallBtn.setOnClickListener(new View.OnClickListener() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("info");
+                builder.setMessage("This app won't work properly unless you grant SMS permission");
+                builder.setIcon(android.R.drawable.ic_dialog_info);
+
+                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }else {
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
+            }
+        }
+
+        String emNum = "01047533589"; //일딴 박예진 번호
+        String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
+
+        emCallBtn.setOnClickListener(new View.OnClickListener() { //긴급 신고 버튼을 누를 때
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:01056237516"));
-                startActivity(intent);
+                try{
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(emNum,null,emText,null,null);
+                    Toast.makeText(getApplicationContext(), "긴급 문자 전송 완료!", Toast.LENGTH_LONG).show();
+                } catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
+                    e.printStackTrace();
+                }
             }
         });
-
-
-
     }
 
-        //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
+    //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
     public boolean onOptionsItemSelected(MenuItem item) {
         //return super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
