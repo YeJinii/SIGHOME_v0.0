@@ -1,6 +1,7 @@
 package com.example.sighome_v00;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
+    private Activity activity = this;
 
     private MqttClient mqttClient;
 
@@ -172,7 +174,29 @@ public class MainActivity extends AppCompatActivity {
                 btn112.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        Toast.makeText(getApplicationContext(), "112 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                        if(ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
+                            if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.SEND_SMS)){
+                                String emNum = "01056237516"; //일딴 박예진 번호
+                                String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
+
+                                emCallBtn.setOnClickListener(new View.OnClickListener() { //긴급 신고 버튼을 누를 때
+                                    @Override
+                                    public void onClick(View v) {
+                                        try{
+                                            SmsManager smsManager = SmsManager.getDefault();
+                                            smsManager.sendTextMessage(emNum,null,emText,null,null);
+                                            Toast.makeText(getApplicationContext(), "긴급 문자 전송 완료!", Toast.LENGTH_LONG).show();
+                                        } catch (Exception e){
+                                            Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                            }else {
+                                ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
+                            }
+                        }
                         alertDialog.dismiss();
                     }
                 });
@@ -181,46 +205,36 @@ public class MainActivity extends AppCompatActivity {
                 btn119.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        Toast.makeText(getApplicationContext(), "119 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                        if(ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
+                            if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.SEND_SMS)){
+                                String emNum = "01047533589"; //일딴 윤세연 번호
+                                String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
+
+                                emCallBtn.setOnClickListener(new View.OnClickListener() { //긴급 신고 버튼을 누를 때
+                                    @Override
+                                    public void onClick(View v) {
+                                        try{
+                                            SmsManager smsManager = SmsManager.getDefault();
+                                            smsManager.sendTextMessage(emNum,null,emText,null,null);
+                                            Toast.makeText(getApplicationContext(), "긴급 문자 전송 완료!", Toast.LENGTH_LONG).show();
+                                        } catch (Exception e){
+                                            Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                            }else {
+                                ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
+                            }
+                        }
                         alertDialog.dismiss();
                     }
                 });
             }
         });
 
-        /*
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
-
-            }else {
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
-            }
-        }*/
-
-        /*
-        String emNum = "01047533589"; //일딴 박예진 번호
-        String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
-
-        emCallBtn.setOnClickListener(new View.OnClickListener() { //긴급 신고 버튼을 누를 때
-            @Override
-            public void onClick(View v) {
-                try{
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(emNum,null,emText,null,null);
-                    Toast.makeText(getApplicationContext(), "긴급 문자 전송 완료!", Toast.LENGTH_LONG).show();
-                } catch (Exception e){
-                    Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
-                    e.printStackTrace();
-                }
-            }
-        });*/
     }
-
-
-
-
-
 
     //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
     public boolean onOptionsItemSelected(MenuItem item) {

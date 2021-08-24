@@ -83,6 +83,7 @@
             android:textColor="@color/emergency"
             android:gravity="center|top"/>
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -94,7 +95,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.3"
         android:text="청각 장애인을 위한 스마트 홈 시스템"
         android:textSize="15sp"
         android:fontFamily="@font/asiahead1"
@@ -102,6 +103,6 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+        android:layout_weight="1"/>
 
 </LinearLayout>
