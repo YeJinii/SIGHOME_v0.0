@@ -17,4 +17,7 @@
     <color name="turn_off">#FFC800</color>
     <color name="emergency">#FF3D2B</color>
 
+    <color name="M112">#0000FF</color>
+    <color name="M119">#FF0000</color>
+
 </resources>

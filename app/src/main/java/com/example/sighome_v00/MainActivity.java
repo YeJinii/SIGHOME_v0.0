@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -156,26 +157,47 @@ public class MainActivity extends AppCompatActivity {
 
         emCallBtn = findViewById(R.id.em_call_btn);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("info");
-                builder.setMessage("This app won't work properly unless you grant SMS permission");
-                builder.setIcon(android.R.drawable.ic_dialog_info);
+        emCallBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                View dialogView = getLayoutInflater().inflate(R.layout.dialog_embtn, null);
 
-                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(v.getContext());
+                builder.setView(dialogView);
+
+                final android.app.AlertDialog alertDialog =builder.create();
+                alertDialog.show();
+
+                Button btn112 = dialogView.findViewById(R.id.send_to_112_btn);
+                btn112.setOnClickListener(new View.OnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
+                    public void onClick(View v){
+                        Toast.makeText(getApplicationContext(), "112 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                        alertDialog.dismiss();
                     }
                 });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+
+                Button btn119 = dialogView.findViewById(R.id.send_to_119_btn);
+                btn119.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        Toast.makeText(getApplicationContext(), "119 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        /*
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)){
+
             }else {
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
             }
-        }
+        }*/
 
+        /*
         String emNum = "01047533589"; //일딴 박예진 번호
         String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
 
@@ -192,8 +214,13 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
     }
+
+
+
+
+
 
     //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
     public boolean onOptionsItemSelected(MenuItem item) {
