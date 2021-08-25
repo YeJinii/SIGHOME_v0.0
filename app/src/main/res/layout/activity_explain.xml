@@ -121,14 +121,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.4"
-                android:fontFamily="@font/asiahead1"
+                android:fontFamily="@font/custom_font_family"
                 android:gravity="left|center_vertical"
                 android:text="침입자가 감지 되었을 땐 빨간색"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_inside_mode"
+                    android:src="@drawable/alarm_on_mode"
                     android:layout_gravity="center"/>
                 <Space
                     android:layout_width="0dp"
@@ -100,7 +100,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="4"
-                android:text="알람 해제"
+                android:text="전등 끄기"
                 android:textSize="30sp"
                 android:background="@drawable/turn_off_btn"
                 android:textColor="@color/black"
@@ -152,7 +152,7 @@
         <LinearLayout
             android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="horizontal">
             <Space
                 android:layout_width="0dp"
@@ -160,14 +160,37 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/exp_btn"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="4"
-                android:text="설명"
-                android:textSize="30sp"
-                android:background="@drawable/round_square_3"
-                android:textColor="@color/white"
+                android:text="청각 장애인을 위한"
+                android:textSize="15sp"
+                android:fontFamily="@font/asiahead1"
+                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:text="스마트 홈 케어 서비스"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:fontFamily="@font/asiahead1"
                 android:gravity="center"
                 android:layout_gravity="center_vertical|center_horizontal"/>

@@ -1,30 +1,18 @@
 package com.example.sighome_v00;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.SmsManager;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -38,8 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 //060700
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MqttClient mqttClient;
 
-    static final int SMS_SEND_PERMISSION=1001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 String title = menuItem.getTitle().toString();
 
-                if(id == R.id.inside_mode){//실내 모드
+                if(id == R.id.inside_mode){//알람 모드
                     toolbar.setBackgroundColor(Color.parseColor("#BDD7EE"));
-                    modeIv.setImageResource(R.drawable.ic_inside_mode);
+                    modeIv.setImageResource(R.drawable.alarm_on_mode);
                 }
                 else if(id == R.id.outside_mode){//실외 모드
                     toolbar.setBackgroundColor(Color.parseColor("#FFC738"));
-                    modeIv.setImageResource(R.drawable.ic_outside_mode);
+                    modeIv.setImageResource(R.drawable.alarm_off_mode);
                 }
                 else if(id == R.id.app_intro){//앱 소개
                     Intent intent = new Intent(MainActivity.this, com.example.sighome_v00.ExplainActivity.class);
@@ -115,28 +101,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        try {
-//            mqttClient = new MqttClient("tcp://111.118.51.164:1883", MqttClient.generateClientId(),null);
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            mqttClient.connect();
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
 
         turnOffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                turnOffBtn.setBackgroundResource(R.drawable.round_square_3);
-//                try {
-//                    mqttClient.publish("/phone/turnoff/enter", new MqttMessage("android".getBytes()));
-//                    mqttClient.publish("/phone/turnoff/bell", new MqttMessage("android".getBytes()));
-//                    mqttClient.publish("/phone/turnoff/window", new MqttMessage("android".getBytes()));
-//                } catch (MqttException e) {
-//                    e.printStackTrace();
-//                }
+                //전등 끄기 버튼 클릭 시
             }
         });
 
@@ -162,75 +131,8 @@ public class MainActivity extends AppCompatActivity {
         emCallBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                View dialogView = getLayoutInflater().inflate(R.layout.dialog_embtn, null);
-
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(v.getContext());
-                builder.setView(dialogView);
-
-                final android.app.AlertDialog alertDialog =builder.create();
-                alertDialog.show();
-
-                Button btn112 = dialogView.findViewById(R.id.send_to_112_btn);
-                btn112.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        if(ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
-                            if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.SEND_SMS)){
-                                String emNum = "01056237516"; //일딴 박예진 번호
-                                String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
-
-                                emCallBtn.setOnClickListener(new View.OnClickListener() { //긴급 신고 버튼을 누를 때
-                                    @Override
-                                    public void onClick(View v) {
-                                        try{
-                                            SmsManager smsManager = SmsManager.getDefault();
-                                            smsManager.sendTextMessage(emNum,null,emText,null,null);
-                                            Toast.makeText(getApplicationContext(), "긴급 문자 전송 완료!", Toast.LENGTH_LONG).show();
-                                        } catch (Exception e){
-                                            Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
-                                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                            }else {
-                                ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
-                            }
-                        }
-                        alertDialog.dismiss();
-                    }
-                });
-
-                Button btn119 = dialogView.findViewById(R.id.send_to_119_btn);
-                btn119.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        if(ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
-                            if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.SEND_SMS)){
-                                String emNum = "01047533589"; //일딴 윤세연 번호
-                                String emText = "<<긴급 신고>>\n숭실대학교 정보과학관\n발신자는 청각 장애인임을 참고 바랍니다.\nsend by SIGHOME";
-
-                                emCallBtn.setOnClickListener(new View.OnClickListener() { //긴급 신고 버튼을 누를 때
-                                    @Override
-                                    public void onClick(View v) {
-                                        try{
-                                            SmsManager smsManager = SmsManager.getDefault();
-                                            smsManager.sendTextMessage(emNum,null,emText,null,null);
-                                            Toast.makeText(getApplicationContext(), "긴급 문자 전송 완료!", Toast.LENGTH_LONG).show();
-                                        } catch (Exception e){
-                                            Toast.makeText(getApplicationContext(), "전송 오류!", Toast.LENGTH_LONG).show();
-                                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();//오류 원인이 찍힌다.
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                            }else {
-                                ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSION);
-                            }
-                        }
-                        alertDialog.dismiss();
-                    }
-                });
+                Intent intent = new Intent(getApplicationContext(), EmMessageSendActivity.class);
+                startActivity(intent);
             }
         });
 
